@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <img src="{{ url_for('static', filename='chatbot_image.jpg') }}" alt="Chatbot Image" class="chatbot-img">
+        <div class="chat-box">
+            <div id="chat-log"></div>
+            <input type="text" id="user-input" placeholder="Type your message here...">
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('send-btn').addEventListener('click', function() {
+            let userMessage = document.getElementById('user-input').value;
+            if (userMessage.trim() !== "") {
+                let chatLog = document.getElementById('chat-log');
+                chatLog.innerHTML += "<div class='user-msg'><strong>You:</strong> " + userMessage + "</div>";
+                document.getElementById('user-input').value = '';
+
+                fetch('/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({message: userMessage})
+                })
+                .then(response => response.json())
+                .then(data => {
+                    chatLog.innerHTML += "<div class='bot-msg'><strong>Chatbot:</strong> " + data.response + "</div>";
+                });
+            }
+        });
+    </script>
+</body>
+</html>
