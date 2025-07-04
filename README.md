@@ -11,5 +11,5 @@ A simple web-based chatbot powered by the Gemini API — crafted with Python and
 ## 🛠️ Tech Stack
 - **Frontend:** HTML, CSS
 - **Backend:** Python (Flask or similar)
-- **API:** Gemini API (by Google)# Gemini-chatbot
+- **API:** Gemini API (by Google) Gemini-chatbot :-
 A chatbot using the Gemini API
